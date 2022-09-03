@@ -20,7 +20,13 @@ class Todo extends AbstractComponent {
   /** @inheritdoc */
   get mutations() {
     return {
-      root: { childList: "updateCounter" },
+      root: [{ childList: "updateCounter" }],
+    };
+  }
+
+  get mutationObserverOptions() {
+    return {
+      childList: true,
     };
   }
 

@@ -1,3 +1,10 @@
+const MUTATION_OBSERVER_OPTIONS = {
+  subtree: true,
+  childList: true,
+  characterData: false,
+  characterDataOldValue: false,
+};
+
 export class AbstractComponent extends HTMLElement {
   /**
    * Initialize
@@ -81,7 +88,7 @@ export class AbstractComponent extends HTMLElement {
       const node = "root" === element ? this : this[element];
       this.mutationCallbacks = [
         ...(this.mutationCallbacks || []),
-        { ...{ node }, ...{ callback: this.mutations } },
+        { ...{ node }, ...{ callbacks: this.mutations[element] } },
       ];
     }
     return this;
@@ -102,16 +109,12 @@ export class AbstractComponent extends HTMLElement {
    */
   initMutationObserver() {
     if (!this._mutationObserver) {
+      const options = this.mutationObserverOptions || MUTATION_OBSERVER_OPTIONS;
       this._mutationObserver = new MutationObserver(
         this.mutationHandler.bind(this)
       );
-      this._mutationObserver.observe(this, {
-        attributes: false,
-        subtree: true,
-        childList: true,
-        characterData: true,
-        characterDataOldValue: true,
-      });
+      this._mutationObserver.observe(this, options);
+      this._mutationObserver.observe(this.shadow, options);
     }
   }
 
@@ -122,21 +125,29 @@ export class AbstractComponent extends HTMLElement {
    */
   mutationHandler(mutationList, observer) {
     for (const mutation of mutationList) {
-      const callback = this.mutationCallbacks.find(
+      const callbacks = this.mutationCallbacks.find(
         (c) => c.node === mutation.target
-      )?.callback;
-      if (callback) {
-        for (const config of Object.values(callback)) {
-          if (config[mutation.type]) {
-            if ("function" === typeof mutation.target[config[mutation.type]]) {
-              mutation.target[config[mutation.type]](mutation, observer);
-            } else if ("function" === typeof config[mutation.type]) {
-              config[mutation.type](mutation, observer);
-            } else {
-              throw new TypeError("MutationHandler is not a function");
-            }
-          }
-        }
+      )?.callbacks;
+      if (callbacks) {
+        Object.values(callbacks).forEach((configs) => {
+          [configs]
+            .flat()
+            .filter((c) => c[mutation.type])
+            .forEach((config) => {
+              try {
+                (
+                  mutation.target[config[mutation.type]] ||
+                  config[mutation.type]
+                )(mutation, observer);
+              } catch (error) {
+                console.group("TypeError: MutationHandler");
+                console.error("MutationHandler is not a function");
+                console.error("Mutation: %o", mutation);
+                console.error("Handler Configuration: %o", config);
+                console.groupEnd();
+              }
+            });
+        });
       }
     }
   }

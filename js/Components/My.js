@@ -3,11 +3,12 @@ class MyComponent extends AbstractComponent {
   get elements() {
     return {
       my: ".myElement",
+      button: ".button",
     };
   }
   get listeners() {
     return {
-      ".myElement": {
+      ".button": {
         click: (e) =>
           this.my.appendChild(document.createTextNode(" is awesome!!")),
       },
@@ -15,7 +16,12 @@ class MyComponent extends AbstractComponent {
   }
   get mutations() {
     return {
-      root: { childList: (m, o) => console.log(m, o) },
+      my: [
+        { childList: (m, o) => console.log(m) },
+        { childList: (m, o) => console.log(o) },
+        { childList: "This raises an error" },
+      ],
+      button: [{ childList: (m, o) => console.log(m, o) }],
     };
   }
   connectedCallback() {
@@ -25,6 +31,7 @@ class MyComponent extends AbstractComponent {
 }
 MyComponent.prototype.template = document.createElement("template");
 MyComponent.prototype.template.innerHTML = /* html */ `
+<button class="button">Click!</button>
 <div class="myElement">
     My Component
 </div>
