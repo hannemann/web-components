@@ -1,0 +1,15 @@
+:root {
+  --item-padding-block: 0.25rem;
+  --item-padding-inline: 0.5rem;
+  --list-item-padding: var(--item-padding-block) var(--item-padding-inline);
+  --clr-bg-list-item-even: hsl(0 0% 100%);
+  --clr-bg-list-item-odd: hsl(0 0% 90%);
+  --clr-bg-list-item-hover: hsl(0 0% 85%);
+}
+
+todo-item {
+  --clr-bg-list-item: var(--clr-bg-list-item-even);
+}
+todo-item:nth-child(odd) {
+  --clr-bg-list-item: var(--clr-bg-list-item-odd);
+}
