@@ -11,10 +11,13 @@ class Hover extends AbstractComponent {
   }
   connectedCallback() {
     super.connectedCallback();
+    this.renderData();
+  }
+
+  renderData() {
     this.brandNode.innerText = this.parentNode.host.brand;
     this.titleNode.innerText = this.parentNode.host.title;
-    this.descriptionNode.innerText =
-      this.parentNode.host.productData.description;
+    this.descriptionNode.innerText = this.parentNode.host.description;
     this.priceNode.innerText = this.parentNode.host.price;
   }
 }

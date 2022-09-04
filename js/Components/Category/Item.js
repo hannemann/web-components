@@ -3,7 +3,13 @@ import { AbstractComponent } from "../Abstract.js";
 class Item extends AbstractComponent {
   #_data = null;
   static get observedAttributes() {
-    return ["data-img", "data-brand", "data-title", "data-price"];
+    return [
+      "data-img",
+      "data-brand",
+      "data-title",
+      "data-price",
+      "data-description",
+    ];
   }
   get elements() {
     return {
@@ -11,6 +17,7 @@ class Item extends AbstractComponent {
       brandNode: ".product-data h4",
       titleNode: ".product-data h3",
       priceNode: ".product-data span",
+      hover: "category-item-hover",
     };
   }
 
@@ -33,6 +40,9 @@ class Item extends AbstractComponent {
         this[`${prop}Node`].innerText = this[prop];
         break;
     }
+    if (this.hover?.renderData) {
+      this.hover.renderData();
+    }
   }
 
   /**
@@ -43,7 +53,8 @@ class Item extends AbstractComponent {
     this.title = data.title;
     this.brand = data.brand;
     this.price = data.price;
-    this.img = data.img;
+    this.img = data.images[0];
+    this.description = data.description;
   }
 
   /**
@@ -107,6 +118,20 @@ class Item extends AbstractComponent {
    */
   set price(v) {
     this.dataset.price = v.toString();
+  }
+
+  /**
+   * @return {String}
+   */
+  get description() {
+    return this.dataset.description;
+  }
+
+  /**
+   * @param {Number} v
+   */
+  set description(v) {
+    this.dataset.description = v.toString();
   }
 }
 
