@@ -1,10 +1,48 @@
 :root {
-  --item-padding-block: 0.25rem;
-  --item-padding-inline: 0.5rem;
+  /* layout */
+  --gap: 0.5rem;
+  --gap-s: calc(var(--gap) / 2);
+  --gap-l: calc(var(--gap) * 2);
+  --item-padding-block: var(--gap-s);
+  --item-padding-inline: var(--gap);
   --list-item-padding: var(--item-padding-block) var(--item-padding-inline);
-  --clr-bg-list-item-even: hsl(0 0% 100%);
+  --product-tile-width: 15rem;
+}
+:root {
+  /* colors */
+  /* common */
+  --hue: 245;
+  --sat: 90%;
+  --lit: 20%;
+  --alpha: 1;
+  --black: hsla(0 0% 0% / 1);
+  --white: hsla(0 0% 100% / 1);
+  --gray: hsla(240 100% 0% / 0.2);
+  --clr-shadow: hsla(
+    var(--hue) var(--sat) var(--lit-shadow, 0%) / var(--alpha-shadow, 0.2)
+  );
+  --clr-bg-list-item-even: var(--white);
   --clr-bg-list-item-odd: hsl(0 0% 90%);
   --clr-bg-list-item-hover: hsl(0 0% 85%);
+  --clr-cta: hsl(var(--hue) var(--sat) calc(var(--lit) + 30%));
+  /* text */
+  --lit-text: 10%;
+  --clr-text: hsla(var(--hue) var(--sat) var(--lit-text) / 1);
+}
+:root {
+  /* decoration */
+  --list-item-shadow: 0.25rem 0.25rem 1.25rem 0 var(--clr-shadow);
+  --category-item-hover-shadow: -0.25rem -0.25rem 1.25rem 0 var(--clr-shadow);
+}
+:root {
+  /* borders */
+  --border-radius-s: calc(var(--border-radius) / 2);
+  --border-radius: 0.5rem;
+  --border-radius-l: calc(var(--border-radius) * 2);
+}
+
+body {
+  color: var(--clr-text);
 }
 
 todo-item {

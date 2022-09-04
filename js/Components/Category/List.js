@@ -1,6 +1,8 @@
 import { AbstractComponent } from "../Abstract.js";
 
 const ITEMS_COUNT = 24;
+// const ITEMS_URL = "https://jsonplaceholder.typicode.com/photos";
+const ITEMS_URL = "https://dummyjson.com/products";
 
 class List extends AbstractComponent {
   get elements() {
@@ -8,50 +10,76 @@ class List extends AbstractComponent {
       items: ".items",
     };
   }
+  #_products = [];
   async connectedCallback() {
+    console.time("Category");
     super.connectedCallback();
     try {
-      console.log("Start load timer.");
-      console.time("load");
-      await this.load();
-      console.log("Data ready.");
-      console.timeLog("load");
-      console.log("Start remder timer.");
-      console.time("render");
+      const items = await this.load();
+      this.initProducts(items);
       this.render();
-      console.timeLog("render");
     } catch (error) {
       console.error(error);
     }
+    console.timeEnd("Category");
   }
 
   async load() {
-    const response = await fetch("https://jsonplaceholder.typicode.com/photos");
+    console.groupCollapsed("Start load timer.");
+    console.time("load");
+    const response = await fetch(ITEMS_URL);
     const result = await response.json();
-    console.log("Data loaded.");
-    console.timeLog("load");
-    this.products = result?.slice(0, ITEMS_COUNT).map((p) => {
-      p.price = (Math.random() * 100).toFixed(2);
-      p.name = p.title.split(" ").shift();
-      return p;
+    console.timeLog("load", "...Data fetched");
+    const items = result?.products?.slice(0, ITEMS_COUNT).map((p) => {
+      return {
+        ...p,
+        ...{
+          img: p.images[0],
+        },
+      };
     });
-    console.log("Data decorated.");
-    console.timeLog("load");
+    console.timeLog("load", "...data decorated.");
+    console.timeEnd("load");
+    console.groupEnd();
+    return items;
+  }
+
+  initProducts(items) {
+    console.groupCollapsed("Creating product tiles...");
+    console.time("initProducts");
+    items.forEach((p) => {
+      const node = document.createElement("category-item");
+      node.productData = p;
+      this.products.push(node);
+    });
+    console.log(`...${ITEMS_COUNT} product tiles created`);
+    console.timeEnd("initProducts");
+    console.groupEnd();
   }
 
   render() {
-    this.products.forEach((p) => this.addItem(p));
+    console.groupCollapsed("Render tiles");
+    console.time("render");
+    this.products.forEach((p) => this.items.appendChild(p));
+    console.log(`${ITEMS_COUNT} product tiles rendered`);
+    console.timeEnd("render");
+    console.groupEnd();
   }
 
-  addItem(product) {
-    const node = document.createElement("category-item");
-    node.productData = product;
-    this.items.appendChild(node);
+  get products() {
+    return this.#_products;
   }
 }
 
 const template = /* html */ `
-<link rel="stylesheet" href="/css/components/Category/List.css">
+<style>
+.items {
+  display: grid;
+  gap: var(--gap-l);
+  grid-template-columns: repeat(auto-fit, minmax(var(--product-tile-width), 1fr));
+  grid-auto-flow: dense;
+}
+</style>
 <h2>Category</h2>
 <div class="items"></div>
 `;
