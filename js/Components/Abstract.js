@@ -6,16 +6,20 @@ const MUTATION_OBSERVER_OPTIONS = {
 };
 
 export class AbstractComponent extends HTMLElement {
+  constructor() {
+    super();
+    this.shadow = this.attachShadow({ mode: "closed" });
+    this.shadow.appendChild(this.template.content.cloneNode(true));
+    this.initElements();
+  }
   /**
    * Initialize
    * Fired when added to dom
    */
   connectedCallback() {
-    this.shadow = this.attachShadow({ mode: "closed" });
-    this.shadow.appendChild(this.template.content.cloneNode(true));
     this.disconnectController = new AbortController();
     this.disconnectedSignal = this.disconnectController.signal;
-    this.initElements().addListeners();
+    this.addListeners();
   }
 
   /**
@@ -148,6 +152,12 @@ export class AbstractComponent extends HTMLElement {
         });
       }
     }
+  }
+
+  static initComponent(name, component, template) {
+    component.prototype.template = document.createElement("template");
+    component.prototype.template.innerHTML = template;
+    customElements.define(name, component);
   }
 
   /**
