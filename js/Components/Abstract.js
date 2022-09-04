@@ -60,12 +60,13 @@ export class AbstractComponent extends HTMLElement {
           "root" === selector
             ? [this.getRootNode()]
             : Array.from(this.shadow.querySelectorAll(selector));
-        if ("function" === typeof this[config[event]]) {
-          cb = this[config[event]].bind(this);
-        } else if ("function" === typeof config[event]) {
-          cb = config[event].bind(this);
+        if ("function" === typeof config[event]) {
+          cb = config[event];
         } else {
-          throw new TypeError("EventHandler is not a function");
+          console.group("TypeError: EventHandler");
+          console.error("EventHandler is not a function");
+          console.error("Handler Configuration: %o", config);
+          console.groupEnd();
         }
         nodes.forEach((node) => {
           node.addEventListener(event, cb, {
@@ -135,10 +136,7 @@ export class AbstractComponent extends HTMLElement {
             .filter((c) => c[mutation.type])
             .forEach((config) => {
               try {
-                (
-                  mutation.target[config[mutation.type]] ||
-                  config[mutation.type]
-                )(mutation, observer);
+                config[mutation.type](mutation, observer);
               } catch (error) {
                 console.group("TypeError: MutationHandler");
                 console.error("MutationHandler is not a function");

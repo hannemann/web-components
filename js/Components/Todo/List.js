@@ -12,15 +12,15 @@ class Todo extends AbstractComponent {
   /** @inheritdoc */
   get listeners() {
     return {
-      button: { click: "addHandler" },
-      input: { keydown: "addHandler" },
+      button: { click: this.addHandler.bind(this) },
+      input: { keydown: this.addHandler.bind(this) },
     };
   }
 
   /** @inheritdoc */
   get mutations() {
     return {
-      root: [{ childList: "updateCounter" }],
+      root: [{ childList: (m, o) => this.updateCounter(m, o) }],
     };
   }
 

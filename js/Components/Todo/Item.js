@@ -16,8 +16,8 @@ class Item extends AbstractComponent {
   /** @inheritdoc */
   get listeners() {
     return {
-      button: { click: "deleteHandler" },
-      input: { change: "updateHandler" },
+      button: { click: this.deleteHandler.bind(this) },
+      input: { change: this.updateHandler.bind(this) },
     };
   }
 

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/theme.css"></link>
+    <script type="module" src="/js/Components/Todo/index.js"></script>
+    <script type="module" defer src="/js/index.js"></script>
+  </head>
+  <body>
+    <h1>Webcomponents Test</h1>
+    <todo-list>
+      <span slot="header">My Todos</span>
+      <todo-item data-label="Embrace JS" data-done="true"></todo-item>
+      <todo-item
+        data-label="Learn Web Components"
+        data-done="false"
+      ></todo-item>
+    </todo-list>
+  </body>
+</html>

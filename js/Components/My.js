@@ -10,7 +10,7 @@ class MyComponent extends AbstractComponent {
     return {
       ".button": {
         click: (e) =>
-          this.my.appendChild(document.createTextNode(" is awesome!!")),
+          this.my.appendChild(document.createTextNode(" are awesome!!")),
       },
     };
   }
@@ -33,7 +33,7 @@ MyComponent.prototype.template = document.createElement("template");
 MyComponent.prototype.template.innerHTML = /* html */ `
 <button class="button">Click!</button>
 <div class="myElement">
-    My Component
+    Web Components
 </div>
 `;
 customElements.define("my-component", MyComponent);
