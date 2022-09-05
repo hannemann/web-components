@@ -26,6 +26,7 @@ class Item extends AbstractComponent {
     super.connectedCallback();
     this.label = this.dataset.label;
     this.checked = this.dataset.done === "true";
+    this.parentNode.updateCounter();
   }
 
   /**
@@ -98,7 +99,20 @@ class Item extends AbstractComponent {
 
 Item.prototype.template = document.createElement("template");
 Item.prototype.template.innerHTML = /* html */ `
-<link rel="stylesheet" href="/css/components/todo-item.css"></link>
+<style>
+:host {
+  display: flex;
+  justify-content: space-between;
+  background: var(--clr-bg-list-item);
+  padding: var(--list-item-padding);
+}
+:host(:hover) {
+  background-color: var(--clr-bg-list-item-hover);
+}
+label.done span {
+  text-decoration: line-through;
+}
+</style>
 <label>
     <input type="checkbox">
     <span></span>

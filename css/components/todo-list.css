@@ -1,5 +1,0 @@
-.add {
-  padding: var(--list-item-padding);
-  display: flex;
-  gap: var(--item-padding-inline);
-}

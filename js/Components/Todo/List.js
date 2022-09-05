@@ -88,7 +88,13 @@ class Todo extends AbstractComponent {
 
 Todo.prototype.template = document.createElement("template");
 Todo.prototype.template.innerHTML = /*html*/ `
-<link rel="stylesheet" href="/css/components/todo-list.css"></link>
+<style>
+.add {
+  padding: var(--list-item-padding);
+  display: flex;
+  gap: var(--item-padding-inline);
+}
+</style>
 <h2><slot name="header">You should set a header</slot></h2>
 <h3>Done: <span></span> / <span></span></h3>
 <section class="add">
