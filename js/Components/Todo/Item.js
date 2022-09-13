@@ -38,10 +38,7 @@ class Item extends AbstractComponent {
   attributeChangedCallback(name, oldValue, newValue) {
     if (!this.input || oldValue === newValue) return;
     if ("data-done" === name) {
-      const checked = newValue === "true";
-      if (this.checked !== checked) {
-        this.checked = checked;
-      }
+      this.checked = newValue === "true";
     }
   }
 
@@ -50,7 +47,7 @@ class Item extends AbstractComponent {
    */
   updateHandler() {
     this.dataset.done = this.checked.toString();
-    this.input.parentNode.classList.toggle("done", this.checked);
+    this.toggleLineThrough();
     this.parentNode.updateCounter();
   }
 
@@ -59,6 +56,10 @@ class Item extends AbstractComponent {
    */
   deleteHandler() {
     this.parentNode.removeChild(this);
+  }
+
+  toggleLineThrough() {
+    this.input.parentNode.classList.toggle("done", this.checked);
   }
 
   /**
@@ -76,6 +77,7 @@ class Item extends AbstractComponent {
   set checked(v) {
     if (this.checked !== !!v) {
       this.input.checked = !!v;
+      this.toggleLineThrough();
       this.input.dispatchEvent(new Event("change"));
     }
   }
