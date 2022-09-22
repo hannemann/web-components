@@ -4,9 +4,9 @@ Provide an abstract class for convenient web components.
 
 ## Features
 
-- Configure event listeners that remove themselves on disconnect
-- Configure elements to fetch from your component for later use
-- configure mutation observers
+-   Configure event listeners that remove themselves on disconnect
+-   Configure elements to fetch from your component for later use
+-   configure mutation observers
 
 ### Event listeners
 
@@ -46,10 +46,10 @@ The selected elements are mapped to instance properties named `key`.
 ### Mutations
 
 Add a mutations getter that returns an object describing the desired mutation observers.  
-The keys of the returned object are element names which need to be configured via the elements getter (see above).  
+The keys of the returned object are names of properties that contain one or multiple nodes of the components shadow dom (see above).  
 The word `root` will be interpreted as the component itself.
 The values are arrays of objects of `mutationType`: `handler` pairs where the handler is a function.  
-By default the childList and its subTree is observed. To change that behavior add a `mutationObserverOptions` getter which returns an object with the desired options.
+By default attributes, the childList and its subTree are observed. To change that behavior add a `mutationObserverOptions` getter which returns an object with the desired options.
 
 ```javascript
   /** @inheritdoc */
