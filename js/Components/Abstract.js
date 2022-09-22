@@ -38,7 +38,9 @@ export class AbstractComponent extends HTMLElement {
      */
     initElements() {
         for (const selector of Object.keys(this.elements)) {
-            const nodes = this.shadow.querySelector(this.elements[selector]);
+            const nodes = Array.from(
+                this.shadow.querySelectorAll(this.elements[selector])
+            );
             this[selector] = nodes?.length === 1 ? nodes[0] : nodes;
         }
         return this;
