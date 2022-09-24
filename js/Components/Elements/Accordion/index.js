@@ -2,9 +2,9 @@ import { AbstractComponent } from "../../Abstract.js";
 import "./Item.js";
 
 /**
- * @property {Array.<AccordeonItem>} items
+ * @property {Array.<AccordionItem>} items
  */
-class Accordeon extends AbstractComponent {
+class Accordion extends AbstractComponent {
     /** @inheritdoc */
     get elements() {
         return {
@@ -97,12 +97,12 @@ class Accordeon extends AbstractComponent {
      */
     get items() {
         return Array.from(
-            this.querySelectorAll("x-accordeon-item:not(.clone)")
+            this.querySelectorAll("x-accordion-item:not(.clone)")
         );
     }
 
     /**
-     * Determine if accordeon can open multiple tabs
+     * Determine if accordion can open multiple tabs
      */
     get multi() {
         return "undefined" !== typeof this.dataset.multi;
@@ -119,4 +119,4 @@ const template = /* html */ `
 <slot></slot>
 `;
 
-AbstractComponent.initComponent("x-accordeon", Accordeon, template);
+AbstractComponent.initComponent("x-accordion", Accordion, template);

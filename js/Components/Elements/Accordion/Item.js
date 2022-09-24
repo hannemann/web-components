@@ -1,6 +1,6 @@
 import { AbstractComponent } from "../../Abstract.js";
 
-class AccordeonItem extends AbstractComponent {
+class AccordionItem extends AbstractComponent {
     static observedAttributes = ["data-open"];
 
     /** @inheritdoc */
@@ -133,4 +133,4 @@ div.content slot::slotted(*) {
 <div class="content"><slot></slot></div>
 `;
 
-AbstractComponent.initComponent("x-accordeon-item", AccordeonItem, template);
+AbstractComponent.initComponent("x-accordion-item", AccordionItem, template);
