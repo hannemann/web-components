@@ -61,7 +61,6 @@ class List extends AbstractComponent {
         const sl = this.shadow.querySelector("slot");
         nodes.forEach((p) => {
             this.appendChild(p);
-            sl.assign(p);
         });
         console.log(`${ITEMS_COUNT} product tiles rendered`);
         console.timeEnd("render");
