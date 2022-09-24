@@ -58,8 +58,13 @@ class List extends AbstractComponent {
     render(nodes) {
         console.groupCollapsed("Render tiles");
         console.time("render");
-        const sl = this.shadow.querySelector("slot");
-        nodes.forEach((p) => {
+        nodes.forEach((p, k) => {
+            if (k === 4) {
+                p.classList.add("wide");
+            }
+            if (k === 12) {
+                p.classList.add("big");
+            }
             this.appendChild(p);
         });
         console.log(`${ITEMS_COUNT} product tiles rendered`);

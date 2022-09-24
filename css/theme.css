@@ -1,4 +1,6 @@
 :root {
+  --fs: 16;
+  font-size: calc(var(--fs) * 1px);
   /* layout */
   --gap: 0.5rem;
   --gap-s: calc(var(--gap) / 2);

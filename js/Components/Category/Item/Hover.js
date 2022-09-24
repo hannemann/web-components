@@ -85,7 +85,7 @@ span {
 <h4></h4>
 <h3></h3>
 <p></p>
-<span></span>
+<span part="product-tile-price"></span>
 <div class="buttons">
     <button>Details</button>
     <button class="cta">Cart</button>

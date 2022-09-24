@@ -1,0 +1,36 @@
+category-item::part(product-tile-media) {
+  aspect-ratio: 3 / 4;
+}
+
+category-item.wide {
+  grid-column: span 2;
+}
+category-item.big {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+category-item.wide::part(product-tile-media) {
+  aspect-ratio: calc(600 + var(--fs)) / 400;
+}
+category-item.big::part(product-tile-media) {
+  aspect-ratio: calc(300 + var(--fs)) / calc(400 + var(--fs));
+}
+
+category-item::part(product-tile-price) {
+  color: red;
+}
+
+@media (max-width: 511px) {
+  category-item,
+  category-item.wide,
+  category-item.big {
+    grid-column: span 1;
+    grid-row: span 1;
+  }
+
+  category-item::part(product-tile-media),
+  category-item.wide::part(product-tile-media),
+  category-item.big::part(product-tile-media) {
+    aspect-ratio: 3 / 4;
+  }
+}

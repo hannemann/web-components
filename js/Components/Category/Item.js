@@ -205,13 +205,15 @@ category-item-hover {
     transform: translateY(0);
 }
 </style>
-<figure><img loading="lazy"></figure>
+<figure part="product-tile-media">
+    <img loading="lazy" part="product-tile-media-image">
+</figure>
 <div class="product-data">
-    <h4></h4>
-    <h3></h3>
-    <span></span>
+    <h4 part="product-tile-heading"></h4>
+    <h3 part="product-tile-heading"></h3>
+    <span part="product-tile-price"></span>
 </div>
-<category-item-hover></category-item-hover>
+<category-item-hover exportparts="product-tile-price"></category-item-hover>
 `;
 
 AbstractComponent.initComponent("category-item", Item, template);
