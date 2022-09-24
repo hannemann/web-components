@@ -4,9 +4,9 @@ Provide an abstract class for convenient web components.
 
 ## Features
 
--   Configure event listeners that remove themselves on disconnect
--   Configure elements to fetch from your component for later use
--   configure mutation observers
+- Configure event listeners that remove themselves on disconnect
+- Configure elements to fetch from your component for later use
+- configure mutation observers
 
 ### Event listeners
 

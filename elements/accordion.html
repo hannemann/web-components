@@ -1,132 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Document</title>
-        <script
-            type="module"
-            src="/js/Components/Elements/Accordion/index.js"
-        ></script>
-        <style>
-            :root {
-                --gap-inline: 1rem;
-                --gap-block: 0.5rem;
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script
+      type="module"
+      src="/js/Components/Elements/Accordion/index.js"
+    ></script>
+    <style>
+      :root {
+        --gap-inline: 1rem;
+        --gap-block: 0.5rem;
 
-                --clr-primary: red;
-                --clr-highlight-text: white;
+        --clr-primary: red;
+        --clr-highlight-text: white;
 
-                --transition-duration-normal: 250ms;
-                --transition-timing-function-normal: ease-in-out;
-            }
-            accordion-box {
-                --clr-accordion-label-fg: var(--clr-highlight-text);
-                --clr-accordion-label-bg: var(--clr-primary);
-                --transition-duration: var(--transition-duration-normal);
-                --transition-timing-function: var(
-                    --transition-timing-function-normal
-                );
-                border-radius: 0.25rem;
-                overflow: hidden;
-                box-shadow: 0 0 1rem 0 black;
-            }
-            accordion-item > div {
-                background: lightblue;
-                padding: 0.5rem 1rem;
-            }
-            accordion-item h3 {
-                display: flex;
-                justify-content: space-between;
-                margin: 0;
-                padding: var(--gap-block) var(--gap-inline);
-                border-bottom: 1px solid black;
-                background-color: var(--clr-accordion-label-bg);
-                color: var(--clr-accordion-label-fg);
-            }
-            accordion-item h3 span:last-child {
-                transition: transform var(--transition-duration)
-                    var(--transition-timing-function);
-            }
-            accordion-item[data-open="true"] h3 span:last-child {
-                transform: rotate(90deg);
-            }
-            accordion-item figure {
-                margin-inline: 0;
-                width: 100%;
-                aspect-ratio: 3 / 4;
-                position: relative;
-            }
-            accordion-item figure figcaption {
-                background: lightgrey;
-                text-align: center;
-            }
-            accordion-item img {
-                width: 100%;
-                height: 100%;
-                object-fit: cover;
-                display: block;
-            }
-        </style>
-    </head>
-    <body>
-        <main style="width: 40vw">
-            <section>Before</section>
-            <accordion-box>
-                <accordion-item data-open="true">
-                    <h3 slot="label">
-                        <span>Test Item 0</span><span>&gt;</span>
-                    </h3>
-                    <a href="#">Boing</a>
-                    <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                        Architecto facilis obcaecati ut dolorum vero. Culpa.
-                    </p>
-                </accordion-item>
-                <accordion-item>
-                    <h3 slot="label">
-                        <span>Test Item 1</span><span>&gt;</span>
-                    </h3>
-                    <div>
-                        <a href="#">Boing</a>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Architecto facilis obcaecati ut dolorum vero.
-                            Culpa.
-                        </p>
-                    </div>
-                    Huba!
-                </accordion-item>
-                <accordion-item>
-                    <h3 slot="label">
-                        <span>Test Item 2</span><span>&gt;</span>
-                    </h3>
-                    <div>
-                        <ul>
-                            <li>Lorem, ipsum.</li>
-                            <li>Lorem, ipsum.</li>
-                            <li>Lorem, ipsum.</li>
-                            <li>Lorem, ipsum.</li>
-                        </ul>
-                    </div>
-                </accordion-item>
-                <accordion-item>
-                    <h3 slot="label">
-                        <span>Test Item 3</span><span>&gt;</span>
-                    </h3>
-                    <div>
-                        <figure>
-                            <img
-                                src="https://dummyjson.com/image/i/products/4/1.jpg"
-                            />
-                            <figcaption>Phone...</figcaption>
-                        </figure>
-                        Lorem, ipsum dolor sit amet consectetur adipisicing
-                        elit. Inventore unde nobis porro fugiat sapiente iste!
-                    </div>
-                </accordion-item>
-            </accordion-box>
-            <section>After</section>
-        </main>
-    </body>
+        --transition-duration-normal: 250ms;
+        --transition-timing-function-normal: ease-in-out;
+      }
+      accordion-box {
+        --clr-accordion-label-fg: var(--clr-highlight-text);
+        --clr-accordion-label-bg: var(--clr-primary);
+        --transition-duration: var(--transition-duration-normal);
+        --transition-timing-function: var(--transition-timing-function-normal);
+        border-radius: 0.25rem;
+        overflow: hidden;
+        box-shadow: 0 0 1rem 0 black;
+      }
+      accordion-item > div {
+        background: lightblue;
+        padding: 0.5rem 1rem;
+      }
+      accordion-item h3 {
+        display: flex;
+        justify-content: space-between;
+        margin: 0;
+        padding: var(--gap-block) var(--gap-inline);
+        border-bottom: 1px solid black;
+        background-color: var(--clr-accordion-label-bg);
+        color: var(--clr-accordion-label-fg);
+      }
+      accordion-item h3 span:last-child {
+        transition: transform var(--transition-duration)
+          var(--transition-timing-function);
+      }
+      accordion-item[data-open="true"] h3 span:last-child {
+        transform: rotate(90deg);
+      }
+      accordion-item figure {
+        margin-inline: 0;
+        width: 100%;
+        aspect-ratio: 3 / 4;
+        position: relative;
+      }
+      accordion-item figure figcaption {
+        background: lightgrey;
+        text-align: center;
+      }
+      accordion-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+    </style>
+  </head>
+  <body>
+    <main style="width: 40vw">
+      <section>Before</section>
+      <accordion-box>
+        <accordion-item data-open="true">
+          <h3 slot="label"><span>Test Item 0</span><span>&gt;</span></h3>
+          <a href="#">Boing</a>
+          <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto
+            facilis obcaecati ut dolorum vero. Culpa.
+          </p>
+        </accordion-item>
+        <accordion-item>
+          <h3 slot="label"><span>Test Item 1</span><span>&gt;</span></h3>
+          <div>
+            <a href="#">Boing</a>
+            <p>
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Architecto facilis obcaecati ut dolorum vero. Culpa.
+            </p>
+          </div>
+          Huba!
+        </accordion-item>
+        <accordion-item>
+          <h3 slot="label"><span>Test Item 2</span><span>&gt;</span></h3>
+          <div>
+            <ul>
+              <li>Lorem, ipsum.</li>
+              <li>Lorem, ipsum.</li>
+              <li>Lorem, ipsum.</li>
+              <li>Lorem, ipsum.</li>
+            </ul>
+          </div>
+        </accordion-item>
+        <accordion-item>
+          <h3 slot="label"><span>Test Item 3</span><span>&gt;</span></h3>
+          <div>
+            <figure>
+              <img src="https://dummyjson.com/image/i/products/4/1.jpg" />
+              <figcaption>Phone...</figcaption>
+            </figure>
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Inventore
+            unde nobis porro fugiat sapiente iste!
+          </div>
+        </accordion-item>
+      </accordion-box>
+      <section>After</section>
+    </main>
+  </body>
 </html>
