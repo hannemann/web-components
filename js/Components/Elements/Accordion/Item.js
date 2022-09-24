@@ -133,4 +133,4 @@ div.content slot::slotted(*) {
 <div class="content"><slot></slot></div>
 `;
 
-AbstractComponent.initComponent("x-accordion-item", AccordionItem, template);
+AbstractComponent.initComponent("accordion-item", AccordionItem, template);

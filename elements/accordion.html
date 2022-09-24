@@ -20,7 +20,7 @@
                 --transition-duration-normal: 250ms;
                 --transition-timing-function-normal: ease-in-out;
             }
-            x-accordion {
+            accordion-box {
                 --clr-accordion-label-fg: var(--clr-highlight-text);
                 --clr-accordion-label-bg: var(--clr-primary);
                 --transition-duration: var(--transition-duration-normal);
@@ -31,11 +31,11 @@
                 overflow: hidden;
                 box-shadow: 0 0 1rem 0 black;
             }
-            x-accordion-item > div {
+            accordion-item > div {
                 background: lightblue;
                 padding: 0.5rem 1rem;
             }
-            x-accordion-item h3 {
+            accordion-item h3 {
                 display: flex;
                 justify-content: space-between;
                 margin: 0;
@@ -44,24 +44,24 @@
                 background-color: var(--clr-accordion-label-bg);
                 color: var(--clr-accordion-label-fg);
             }
-            x-accordion-item h3 span:last-child {
+            accordion-item h3 span:last-child {
                 transition: transform var(--transition-duration)
                     var(--transition-timing-function);
             }
-            x-accordion-item[data-open="true"] h3 span:last-child {
+            accordion-item[data-open="true"] h3 span:last-child {
                 transform: rotate(90deg);
             }
-            x-accordion-item figure {
+            accordion-item figure {
                 margin-inline: 0;
                 width: 100%;
                 aspect-ratio: 3 / 4;
                 position: relative;
             }
-            x-accordion-item figure figcaption {
+            accordion-item figure figcaption {
                 background: lightgrey;
                 text-align: center;
             }
-            x-accordion-item img {
+            accordion-item img {
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
@@ -72,8 +72,8 @@
     <body>
         <main style="width: 40vw">
             <section>Before</section>
-            <x-accordion>
-                <x-accordion-item data-open="true">
+            <accordion-box>
+                <accordion-item data-open="true">
                     <h3 slot="label">
                         <span>Test Item 0</span><span>&gt;</span>
                     </h3>
@@ -82,8 +82,8 @@
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Architecto facilis obcaecati ut dolorum vero. Culpa.
                     </p>
-                </x-accordion-item>
-                <x-accordion-item>
+                </accordion-item>
+                <accordion-item>
                     <h3 slot="label">
                         <span>Test Item 1</span><span>&gt;</span>
                     </h3>
@@ -96,8 +96,8 @@
                         </p>
                     </div>
                     Huba!
-                </x-accordion-item>
-                <x-accordion-item>
+                </accordion-item>
+                <accordion-item>
                     <h3 slot="label">
                         <span>Test Item 2</span><span>&gt;</span>
                     </h3>
@@ -109,8 +109,8 @@
                             <li>Lorem, ipsum.</li>
                         </ul>
                     </div>
-                </x-accordion-item>
-                <x-accordion-item>
+                </accordion-item>
+                <accordion-item>
                     <h3 slot="label">
                         <span>Test Item 3</span><span>&gt;</span>
                     </h3>
@@ -124,8 +124,8 @@
                         Lorem, ipsum dolor sit amet consectetur adipisicing
                         elit. Inventore unde nobis porro fugiat sapiente iste!
                     </div>
-                </x-accordion-item>
-            </x-accordion>
+                </accordion-item>
+            </accordion-box>
             <section>After</section>
         </main>
     </body>

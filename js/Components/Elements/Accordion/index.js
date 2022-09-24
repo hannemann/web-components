@@ -96,9 +96,7 @@ class Accordion extends AbstractComponent {
      * obtain items
      */
     get items() {
-        return Array.from(
-            this.querySelectorAll("x-accordion-item:not(.clone)")
-        );
+        return Array.from(this.querySelectorAll("accordion-item:not(.clone)"));
     }
 
     /**
@@ -119,4 +117,4 @@ const template = /* html */ `
 <slot></slot>
 `;
 
-AbstractComponent.initComponent("x-accordion", Accordion, template);
+AbstractComponent.initComponent("accordion-box", Accordion, template);
