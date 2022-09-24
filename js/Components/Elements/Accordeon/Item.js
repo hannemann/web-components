@@ -103,11 +103,9 @@ class AccordeonItem extends AbstractComponent {
 const template = /* html */ `
 <style>
 :host {
-    box-sizing: border-box;
     display: block;
     overflow: hidden;
     position: relative;
-    isolation: isolate;
 }
 div.label {
     cursor: pointer;

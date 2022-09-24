@@ -113,6 +113,7 @@ const template = /* html */ `
 <style>
 :host {
     position: relative;
+    display: block;
 }
 </style>
 <slot></slot>
