@@ -2,6 +2,15 @@
 
 Provide an abstract class for convenient web components.
 
+## Kickstart
+
+```bash
+cp .env-example .env
+make build
+make init
+make dev
+```
+
 ## Features
 
 - Configure event listeners that remove themselves on disconnect
