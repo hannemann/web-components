@@ -1,5 +1,5 @@
+include ./.env
 SHELL := /bin/bash
-DEV_DEPENDENCIES="esbuild postcss postcss-cli npm-add-script postcss-preset-env esbuild-postcss"
 BUILD_FLAGS=--no-cache --force-rm
 FG_BLK:=$(shell tput setaf 0)
 FG_RED:=$(shell tput setaf 1)
@@ -21,41 +21,40 @@ BOLD:=$(shell tput bold)
 SGR0 := $(shell tput sgr0)
 
 .PHONY:
-
 build:
 	docker-compose build $(BUILD_FLAGS)
 
 dev:
-	@printf '$(BOLD)$(FG_GRN)Run in development mode.$(SGR0)' && echo && \
+	@printf '$(BOLD)$(FG_GRN)Run in development mode.$(SGR0)\n' && \
 	docker-compose run -e NODE_ENV=development node npm run build && \
 	printf '$(BOLD)$(FG_GRN)done.$(SGR0)' && echo
 
 prod:
-	@printf '$(BOLD)$(FG_GRN)Build in production mode ... $(SGR0)' && \
+	@printf '$(BOLD)$(FG_GRN)Build in production mode ... $(SGR0)\n' && \
 	docker-compose run -e NODE_ENV=production node npm run build && \
 	printf '$(BOLD)$(FG_GRN)done.$(SGR0)' && echo
 
 init:
-	@printf '$(BOLD)$(FG_GRN)Init Project ... $(SGR0)' && \
-	$(MAKE) clean
+	@printf '$(BOLD)$(FG_GRN)Init Project ... $(SGR0)\n' && \
+	$(MAKE) -s clean && \
 	docker-compose run -u node node npm init -y && \
-	$(MAKE) install-dev i=$(DEV_DEPENDENCIES) && \
+	$(MAKE) -s install-dev i=$(DEV_DEPENDENCIES) && \
 	docker-compose run -u node node ./node_modules/.bin/npmAddScript -k build -v "node ./js/build.js" && \
-	printf '$(BOLD)$(FG_GRN)done.$(SGR0)' && echo
+	printf '$(BOLD)$(FG_GRN)done.$(SGR0)\n'
 
 install:
-	@printf '$(BOLD)$(FG_GRN)Installing package$(SGR0) $(i) ... ' && echo && \
+	@printf '$(BOLD)$(FG_GRN)Installing package$(SGR0) $(i) ... \n' && \
 	docker-compose run -u node node npm i $(i)	&& \
-	printf '$(BOLD)$(FG_GRN)done.$(SGR0)' && echo
+	printf '$(BOLD)$(FG_GRN)done.$(SGR0)\n'
 
 install-dev:
-	@printf '$(BOLD)$(FG_GRN)Installing dev dependency:$(SGR0) $(i) ... ' && echo && \
+	@printf '$(BOLD)$(FG_GRN)Installing dev dependency:$(SGR0) $(i) ... \n' && \
 	docker-compose run -u node node npm -D i $(i)	&& \
-	printf '$(BOLD)$(FG_GRN)done.$(SGR0)' && echo
+	printf '$(BOLD)$(FG_GRN)done.$(SGR0)\n'
 
 clean:
 	@printf '$(BOLD)$(FG_RED)Cleanup all ...$(SGR0)\n' && \
-	read -p 'Sure? ' -s -n 1 -r  && \
+	read -p 'Sure? (y/n)' -s -n 1 -r  && \
 	if [ "_$$REPLY" = "_y" ]; then \
 		rm -rf ./node_modules ./package.json ./package-lock.json && \
 		printf '\n$(BOLD)$(FG_GRN)... done.$(SGR0)\n'; \
@@ -65,7 +64,7 @@ clean:
 
 clean-logs:
 	@printf '$(BOLD)$(FG_RED)Cleanup logs ...$(SGR0)\n' && \
-	read -p 'Sure? ' -s -n 1 -r  && \
+	read -p 'Sure? (y/n)' -s -n 1 -r  && \
 	if [ "_$$REPLY" = "_y" ]; then \
 		rm -rf ./logs/npm/* && \
 		printf '\n$(BOLD)$(FG_GRN)... done.$(SGR0)\n'; \
@@ -73,4 +72,7 @@ clean-logs:
 		printf '\n$(BOLD)$(FG_RED)... aborted.$(SGR0)\n'; \
 	fi
 
+ifndef VERBOSE
+.SILENT:
+endif
 .DEFAULT_GOAL := dev
