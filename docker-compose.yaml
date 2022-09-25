@@ -1,0 +1,9 @@
+version: "2"
+services:
+  node:
+    build: ./docker
+    volumes:
+      - .:/var/www/
+      - ./logs/npm:/root/.npm/_logs
+    ports:
+      - "3000:3000"
