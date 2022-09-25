@@ -21,14 +21,14 @@ const watch = isProduction
 const defaults = { minify, sourcemap, bundle, target, watch };
 
 const cssConfig = {
-  entryPoints: ["./css/style.css"],
-  outfile: "../public/static/style.css",
+  entryPoints: ["./css/core.css"],
+  outfile: "../public/static/core.css",
   plugins: [postcss()],
 };
 
 const promptConfig = {
-  entryPoints: ["./js/prompt.js"],
-  outfile: "../public/static/prompt.js",
+  entryPoints: ["./js/core.js"],
+  outfile: "../public/static/core.js",
 };
 
 const deferConfig = {
