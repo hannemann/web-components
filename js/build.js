@@ -30,6 +30,8 @@ const componentsConfig = {
   outfile: "./public/static/components.js",
 };
 
+process.on("SIGINT", () => process.exit());
+
 esbuild.build({ ...cssConfig, ...defaults }).catch(() => process.exit(1));
 esbuild
   .build({ ...componentsConfig, ...defaults })
