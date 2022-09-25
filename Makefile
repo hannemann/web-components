@@ -36,7 +36,7 @@ prod:
 
 init:
 	@printf '$(BOLD)$(FG_GRN)Init Project ... $(SGR0)\n' && \
-	$(MAKE) -s clean && \
+	$(MAKE) -s clean-src && \
 	docker-compose run -u node node npm init -y && \
 	$(MAKE) -s install-dev i=$(DEV_DEPENDENCIES) && \
 	docker-compose run -u node node ./node_modules/.bin/json -I -f package.json -e "this.type=\"module\"" && \
@@ -54,11 +54,11 @@ install-dev:
 	docker-compose run -u node node npm -D i $(i)	&& \
 	printf '$(BOLD)$(FG_GRN)done.$(SGR0)\n'
 
-clean:
-	@printf '$(BOLD)$(FG_RED)Cleanup all ...$(SGR0)\n' && \
+clean-src:
+	@printf '$(BOLD)$(FG_RED)Cleanup src ...$(SGR0)\n' && \
 	read -p 'Sure? (y/n)' -s -n 1 -r  && \
 	if [ "_$$REPLY" = "_y" ]; then \
-		rm -rf ./node_modules ./package.json ./package-lock.json && \
+		rm -rf ./src/node_modules ./src/package.json ./src/package-lock.json && \
 		printf '\n$(BOLD)$(FG_GRN)... done.$(SGR0)\n'; \
 	else \
 		printf '\n$(BOLD)$(FG_RED)... aborted.$(SGR0)\n'; \

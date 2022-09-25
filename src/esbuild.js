@@ -22,21 +22,22 @@ const defaults = { minify, sourcemap, bundle, target, watch };
 
 const cssConfig = {
   entryPoints: ["./css/style.css"],
-  outfile: "./public/static/style.css",
+  outfile: "../public/static/style.css",
   plugins: [postcss()],
 };
 
-const noDeferConfig = {
+const promptConfig = {
   entryPoints: ["./js/prompt.js"],
-  outfile: "./public/static/prompt.js",
+  outfile: "../public/static/prompt.js",
 };
 
-const jsConfig = {
-  entryPoints: ["./js/Components/index.js"],
-  outfile: "./public/static/index.js",
+const deferConfig = {
+  entryPoints: ["./js/defer.js"],
+  outfile: "../public/static/defer.js",
 };
 
 process.on("SIGINT", () => process.exit());
 
 esbuild.build({ ...cssConfig, ...defaults }).catch(() => process.exit(1));
-esbuild.build({ ...noDeferConfig, ...defaults }).catch(() => process.exit(1));
+esbuild.build({ ...promptConfig, ...defaults }).catch(() => process.exit(1));
+esbuild.build({ ...deferConfig, ...defaults }).catch(() => process.exit(1));

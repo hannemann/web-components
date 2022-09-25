@@ -1,3 +1,7 @@
 {
-  "recommendations": ["csstools.postcss"]
+  "recommendations": [
+    "csstools.postcss",
+    "ritwickdey.liveserver",
+    "esbenp.prettier-vscode"
+  ]
 }

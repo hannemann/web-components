@@ -1,22 +1,14 @@
 {
-  "name": "www",
+  "name": "src",
   "version": "1.0.0",
-  "description": "Provide an abstract class for convenient web components.",
+  "description": "",
   "main": "esbuild.js",
   "scripts": {
     "build": "node ./esbuild.js"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/hannemann/web-components.git"
-  },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/hannemann/web-components/issues"
-  },
-  "homepage": "https://github.com/hannemann/web-components#readme",
   "devDependencies": {
     "cssnano": "^5.1.13",
     "esbuild": "^0.15.9",
