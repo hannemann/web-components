@@ -20,7 +20,7 @@ category-item::part(product-tile-price) {
   color: red;
 }
 
-@media (max-width: 511px) {
+@media (--one-product-tile) {
   category-item,
   category-item.wide,
   category-item.big {

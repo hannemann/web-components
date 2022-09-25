@@ -1,5 +1,6 @@
-const esbuild = require("esbuild");
-const postcss = require("esbuild-postcss");
+import esbuild from "esbuild";
+import postcss from "esbuild-postcss";
+
 const isProduction = process.env.NODE_ENV === "production";
 const minify = true;
 const sourcemap = "inline";
@@ -25,14 +26,17 @@ const cssConfig = {
   plugins: [postcss()],
 };
 
-const componentsConfig = {
-  entryPoints: ["./js/Components/build.js"],
-  outfile: "./public/static/components.js",
+const noDeferConfig = {
+  entryPoints: ["./js/prompt.js"],
+  outfile: "./public/static/prompt.js",
+};
+
+const jsConfig = {
+  entryPoints: ["./js/Components/index.js"],
+  outfile: "./public/static/index.js",
 };
 
 process.on("SIGINT", () => process.exit());
 
 esbuild.build({ ...cssConfig, ...defaults }).catch(() => process.exit(1));
-esbuild
-  .build({ ...componentsConfig, ...defaults })
-  .catch(() => process.exit(1));
+esbuild.build({ ...noDeferConfig, ...defaults }).catch(() => process.exit(1));

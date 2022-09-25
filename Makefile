@@ -39,7 +39,9 @@ init:
 	$(MAKE) -s clean && \
 	docker-compose run -u node node npm init -y && \
 	$(MAKE) -s install-dev i=$(DEV_DEPENDENCIES) && \
-	docker-compose run -u node node ./node_modules/.bin/npmAddScript -k build -v "node ./js/build.js" && \
+	docker-compose run -u node node ./node_modules/.bin/json -I -f package.json -e "this.type=\"module\"" && \
+	docker-compose run -u node node ./node_modules/.bin/json -I -f package.json -e "this.scripts.build=\"node ./esbuild.js\"" && \
+	docker-compose run -u node node ./node_modules/.bin/json -I -f package.json -e "delete this.scripts.test" && \
 	printf '$(BOLD)$(FG_GRN)done.$(SGR0)\n'
 
 install:
@@ -67,6 +69,16 @@ clean-logs:
 	read -p 'Sure? (y/n)' -s -n 1 -r  && \
 	if [ "_$$REPLY" = "_y" ]; then \
 		rm -rf ./logs/npm/* && \
+		printf '\n$(BOLD)$(FG_GRN)... done.$(SGR0)\n'; \
+	else \
+		printf '\n$(BOLD)$(FG_RED)... aborted.$(SGR0)\n'; \
+	fi
+
+clean-static:
+	@printf '$(BOLD)$(FG_RED)Cleanup static files ...$(SGR0)\n' && \
+	read -p 'Sure? (y/n)' -s -n 1 -r  && \
+	if [ "_$$REPLY" = "_y" ]; then \
+		rm -rf ./public/static/* && \
 		printf '\n$(BOLD)$(FG_GRN)... done.$(SGR0)\n'; \
 	else \
 		printf '\n$(BOLD)$(FG_RED)... aborted.$(SGR0)\n'; \

@@ -2,10 +2,9 @@
   "name": "www",
   "version": "1.0.0",
   "description": "Provide an abstract class for convenient web components.",
-  "main": "postcss.config.js",
+  "main": "esbuild.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "node ./js/build.js"
+    "build": "node ./esbuild.js"
   },
   "repository": {
     "type": "git",
@@ -19,11 +18,15 @@
   },
   "homepage": "https://github.com/hannemann/web-components#readme",
   "devDependencies": {
+    "cssnano": "^5.1.13",
     "esbuild": "^0.15.9",
     "esbuild-postcss": "^0.0.4",
-    "npm-add-script": "^1.1.0",
+    "json": "^11.0.0",
     "postcss": "^8.4.16",
     "postcss-cli": "^10.0.0",
-    "postcss-preset-env": "^7.8.2"
-  }
+    "postcss-custom-media": "^8.0.2",
+    "postcss-import": "^15.0.0",
+    "postcss-nested": "^5.0.6"
+  },
+  "type": "module"
 }
