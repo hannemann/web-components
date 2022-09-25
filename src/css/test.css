@@ -1,0 +1,32 @@
+@custom-media --small-viewport (max-width: 30em);
+@custom-selector :--headings h1, h2, h3;
+
+.article {
+  font-size: 1rem;
+  & .title {
+    font-size: 3rem;
+  }
+}
+
+:--headings {
+  background: blue;
+
+  @media (--small-viewport) {
+    background: cyan;
+  }
+}
+
+.article {
+  color: red;
+  section & {
+    color: green;
+  }
+
+  &__bem {
+    color: maroon;
+
+    &--it {
+      color: lightblue;
+    }
+  }
+}

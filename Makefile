@@ -19,6 +19,14 @@ BG_CYA:=$(shell tput setab 6)
 BG_WHT:=$(shell tput setab 7)
 BOLD:=$(shell tput bold)
 SGR0 := $(shell tput sgr0)
+DOCKER_USER=node
+SERVICE=node
+
+ifeq ($(POSTCSS_PRESET_ENV), true)
+	NODE_INSTALL_PACKAGES:=$(DEV_COMMON) postcss-preset-env
+else
+	NODE_INSTALL_PACKAGES:=$(NODE_DEV_PACKAGES)
+endif
 
 .PHONY:
 build:
@@ -26,32 +34,32 @@ build:
 
 dev:
 	@printf '$(BOLD)$(FG_GRN)Run in development mode.$(SGR0)\n' && \
-	docker-compose run -p 8000:8000 -e NODE_ENV=development node npm run build && \
+	docker-compose run -p $(ESSERVE_PORT):$(ESSERVE_PORT) -e NODE_ENV=development -u $(DOCKER_USER) $(SERVICE) npm run build && \
 	printf '$(BOLD)$(FG_GRN)done.$(SGR0)' && echo
 
 prod:
 	@printf '$(BOLD)$(FG_GRN)Build in production mode ... $(SGR0)\n' && \
-	docker-compose run -e NODE_ENV=production node npm run build && \
+	docker-compose run -e NODE_ENV=production -u $(DOCKER_USER) $(SERVICE) npm run build && \
 	printf '$(BOLD)$(FG_GRN)done.$(SGR0)' && echo
 
 init:
 	@printf '$(BOLD)$(FG_GRN)Init Project ... $(SGR0)\n' && \
 	$(MAKE) -s clean-src && \
-	docker-compose run -u node node npm init -y && \
-	$(MAKE) -s install-dev i=$(DEV_DEPENDENCIES) && \
-	docker-compose run -u node node ./node_modules/.bin/json -I -f package.json -e "this.type=\"module\"" && \
-	docker-compose run -u node node ./node_modules/.bin/json -I -f package.json -e "this.scripts.build=\"node ./esbuild.js\"" && \
-	docker-compose run -u node node ./node_modules/.bin/json -I -f package.json -e "delete this.scripts.test" && \
+	docker-compose run -u $(DOCKER_USER) $(SERVICE) npm init -y > /dev/null && \
+	$(MAKE) -s install-dev i="$(NODE_INSTALL_PACKAGES)" && \
+	docker-compose run -u $(DOCKER_USER) $(SERVICE) ./node_modules/.bin/json -I -f package.json -e "this.type=\"module\"" && \
+	docker-compose run -u $(DOCKER_USER) $(SERVICE) ./node_modules/.bin/json -I -f package.json -e "this.scripts.build=\"node ./esbuild.js\"" && \
+	docker-compose run -u $(DOCKER_USER) $(SERVICE) ./node_modules/.bin/json -I -f package.json -e "delete this.scripts.test" && \
 	printf '$(BOLD)$(FG_GRN)done.$(SGR0)\n'
 
 install:
 	@printf '$(BOLD)$(FG_GRN)Installing package$(SGR0) $(i) ... \n' && \
-	docker-compose run -u node node npm i $(i)	&& \
+	docker-compose run -u $(DOCKER_USER) $(SERVICE) npm i $(i)	&& \
 	printf '$(BOLD)$(FG_GRN)done.$(SGR0)\n'
 
 install-dev:
 	@printf '$(BOLD)$(FG_GRN)Installing dev dependency:$(SGR0) $(i) ... \n' && \
-	docker-compose run -u node node npm -D i $(i)	&& \
+	docker-compose run -u $(DOCKER_USER) $(SERVICE) npm -D i $(i)	&& \
 	printf '$(BOLD)$(FG_GRN)done.$(SGR0)\n'
 
 clean-src:

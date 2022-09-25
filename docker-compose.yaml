@@ -6,4 +6,4 @@ services:
       - .:/var/www/
       - ./logs/npm:/root/.npm/_logs
     ports:
-      - "8000:8000"
+      - "$ESSERVE_PORT:$ESSERVE_PORT"
