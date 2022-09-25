@@ -1,0 +1,54 @@
+accordion-box {
+  --clr-accordion-label-fg: var(--clr-highlight-text);
+  --clr-accordion-label-bg: var(--clr-primary);
+  --transition-duration: var(--transition-duration-normal);
+  --transition-timing-function: var(--transition-timing-function-normal);
+  border-radius: 0.25rem;
+  overflow: hidden;
+  box-shadow: 0 0 1rem 0 black;
+}
+
+accordion-item {
+  & > div {
+    background: lightblue;
+    padding: 0.5rem 1rem;
+  }
+
+  & > h3 {
+    display: flex;
+    justify-content: space-between;
+    margin: 0;
+    padding: var(--gap-block) var(--gap-inline);
+    border-bottom: 1px solid black;
+    background-color: var(--clr-accordion-label-bg);
+    color: var(--clr-accordion-label-fg);
+
+    & > span:last-child {
+      transition: transform var(--transition-duration)
+        var(--transition-timing-function);
+    }
+  }
+
+  &[data-open="true"] h3 span:last-child {
+    transform: rotate(90deg);
+  }
+
+  & figure {
+    margin-inline: 0;
+    width: 100%;
+    aspect-ratio: 3 / 4;
+    position: relative;
+
+    & img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    & figcaption {
+      background: lightgrey;
+      text-align: center;
+    }
+  }
+}
