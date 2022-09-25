@@ -9,22 +9,30 @@ const watch = isProduction
         if (error) console.error("watch build failed:", error);
         else {
           console.log("watch build succeeded:", result);
-          // HERE: somehow restart the server from here, e.g., by sending a signal that you trap and react to inside the server.
         }
       },
     };
 
-const options = {
+const buildOptions = {
   minify: true,
   sourcemap: "inline",
   bundle: true,
   target: ["esnext"],
-  watch,
   plugins: [postcss()],
   outdir: "../public/static/",
   entryPoints: ["./css/core.css", "./js/core.js", "./js/defer.js"],
 };
 
-process.on("SIGINT", () => process.exit());
+const serveOptions = {
+  port: 8000,
+  servedir: "../public",
+};
 
-esbuild.build(options).catch(() => process.exit(1));
+process.on("SIGINT", function () {
+  process.exit();
+});
+
+if (!isProduction) {
+  esbuild.serve(serveOptions, buildOptions);
+}
+esbuild.build({ ...buildOptions, ...{ watch } });

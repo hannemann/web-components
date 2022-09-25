@@ -6,4 +6,4 @@ services:
       - .:/var/www/
       - ./logs/npm:/root/.npm/_logs
     ports:
-      - "3000:3000"
+      - "8000:8000"

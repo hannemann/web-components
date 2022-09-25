@@ -26,7 +26,7 @@ build:
 
 dev:
 	@printf '$(BOLD)$(FG_GRN)Run in development mode.$(SGR0)\n' && \
-	docker-compose run -e NODE_ENV=development node npm run build && \
+	docker-compose run -p 8000:8000 -e NODE_ENV=development node npm run build && \
 	printf '$(BOLD)$(FG_GRN)done.$(SGR0)' && echo
 
 prod:
