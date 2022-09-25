@@ -10,7 +10,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "cssnano": "^5.1.13",
     "esbuild": "^0.15.9",
     "esbuild-postcss": "^0.0.4",
     "json": "^11.0.0",
