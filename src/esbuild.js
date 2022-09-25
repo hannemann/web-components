@@ -2,10 +2,6 @@ import esbuild from "esbuild";
 import postcss from "esbuild-postcss";
 
 const isProduction = process.env.NODE_ENV === "production";
-const minify = true;
-const sourcemap = "inline";
-const bundle = true;
-const target = ["esnext"];
 const watch = isProduction
   ? false
   : {
@@ -18,26 +14,17 @@ const watch = isProduction
       },
     };
 
-const defaults = { minify, sourcemap, bundle, target, watch };
-
-const cssConfig = {
-  entryPoints: ["./css/core.css"],
-  outfile: "../public/static/core.css",
+const options = {
+  minify: true,
+  sourcemap: "inline",
+  bundle: true,
+  target: ["esnext"],
+  watch,
   plugins: [postcss()],
-};
-
-const promptConfig = {
-  entryPoints: ["./js/core.js"],
-  outfile: "../public/static/core.js",
-};
-
-const deferConfig = {
-  entryPoints: ["./js/defer.js"],
-  outfile: "../public/static/defer.js",
+  outdir: "../public/static/",
+  entryPoints: ["./css/core.css", "./js/core.js", "./js/defer.js"],
 };
 
 process.on("SIGINT", () => process.exit());
 
-esbuild.build({ ...cssConfig, ...defaults }).catch(() => process.exit(1));
-esbuild.build({ ...promptConfig, ...defaults }).catch(() => process.exit(1));
-esbuild.build({ ...deferConfig, ...defaults }).catch(() => process.exit(1));
+esbuild.build(options).catch(() => process.exit(1));
