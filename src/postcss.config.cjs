@@ -7,6 +7,7 @@ if (process.env.POSTCSS_PRESET_ENV === "true") {
   plugins = [
     require("postcss-import"),
     require("postcss-custom-media"),
+    require("postcss-media-minmax"),
     require("postcss-custom-selectors"),
     require(`postcss-${process.env.POSTCSS_NEST_PLUGIN}`),
   ];
