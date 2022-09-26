@@ -25,6 +25,22 @@
   & .title {
     font-size: 3rem;
   }
+
+  @nest .title & {
+    background-color: red;
+  }
+}
+
+/* --------------------- */
+
+.article {
+  color: blue;
+  & .tile {
+    color: maroon;
+    &:is(.emphasized) {
+      color: yellow;
+    }
+  }
 }
 
 :--headings {
@@ -32,20 +48,5 @@
 
   @media (--small-viewport) {
     background: cyan;
-  }
-}
-
-.article {
-  color: red;
-  section & {
-    color: green;
-  }
-
-  &__bem {
-    color: maroon;
-
-    &--it {
-      color: lightblue;
-    }
   }
 }

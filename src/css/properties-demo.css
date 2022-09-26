@@ -17,13 +17,13 @@
 
   font-size: 16px;
 
-  * {
+  & * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
   }
 
-  body {
+  & body {
     display: grid;
     grid-template-columns:
       minmax(var(--gap), auto) minmax(auto, var(--xl-width))
@@ -40,19 +40,19 @@
     font-size: var(--fs);
     line-height: var(--lh);
 
-    :--head-foot {
+    & :--head-foot {
       background-color: var(--color-primary);
       color: var(--color-text-invert);
       outline: 100vmax solid var(--color-primary);
       clip-path: polygon(-100vmax 0, 100vmax 0, 100vmax 100%, -100vmax 100%);
     }
 
-    :--head-foot,
-    main {
+    & :--head-foot,
+    & main {
       padding: var(--gap);
     }
 
-    header {
+    & header {
       position: fixed;
       inset: 0 var(--gap) auto;
       grid-area: head;
@@ -64,11 +64,11 @@
         inset: 0 calc((100vw - var(--xl-width)) / 2) auto;
       }
 
-      .logo {
+      & .logo {
         font-size: var(--logo-size);
       }
 
-      .burger {
+      & .burger {
         display: block;
         background-color: var(--color-text-invert);
         width: calc(var(--fs) * 1.5);
@@ -90,7 +90,7 @@
       }
     }
 
-    main {
+    & main {
       grid-area: main;
       background-color: var(--color-secondary);
       display: grid;
@@ -98,13 +98,13 @@
       gap: var(--gap);
 
       & > section {
-        :--headings {
+        & :--headings {
           font-family: sans-serif;
         }
       }
     }
 
-    footer {
+    & footer {
       grid-area: foot;
     }
   }
