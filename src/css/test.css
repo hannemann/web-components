@@ -1,10 +1,14 @@
 @custom-media --small-viewport (max-width: 30em);
+@custom-media --bp-xs (width <= 360px);
 @custom-media --bp-s (width <= 375px);
-@custom-media --bp-m (375px < width <= 768px);
-@custom-media --bp-l (768px < width <= 1024px);
-@custom-media --bp-xl (1448px <= width);
+@custom-media --bp-m (width <= 768px);
+@custom-media --bp-l (width <= 1024px);
+@custom-media --bp-xl (width <= 1448px);
+@custom-media --bp-xxl (width > 1448px);
 @custom-selector :--headings h1, h2, h3;
 
+@media (--bp-xs) {
+}
 @media (--bp-s) {
 }
 @media (--bp-m) {
@@ -12,6 +16,8 @@
 @media (--bp-l) {
 }
 @media (--bp-xl) {
+}
+@media (--bp-xxl) {
 }
 
 .article {

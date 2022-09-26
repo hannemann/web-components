@@ -1,9 +1,6 @@
-@custom-media --one-product-tile (max-width: 511px);
-@custom-media --bp-s (width <= 375px);
-@custom-media --bp-m (375px < width <= 768px);
-@custom-media --bp-l (768px < width <= 1024px);
-@custom-media --bp-xl (1448px <= width);
-@custom-selector :--main-nodes body > header, body > main, body > footer;
+@import "./layout/custom-media.css";
+@custom-selector :--head-foot header, footer;
+@custom-selector :--headings h1, h2, h3, h4, h5, h6;
 
 :root {
   --fs: 16;

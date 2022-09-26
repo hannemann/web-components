@@ -1,0 +1,140 @@
+.properties-demo {
+  --max-width: 100vw;
+  --base-gap: 0.5rem;
+  --gap: var(--base-gap);
+  --base-fs: 1rem;
+  --base-lh: 1.1875;
+  --fs: var(--base-fs);
+  --lh: var(--base-lh);
+
+  --color-primary: maroon;
+  --color-secondary: orange;
+  --color-text: black;
+  --color-text-invert: white;
+
+  --logo-size: 2rem;
+  --header-height: calc(2 * var(--gap) + var(--logo-size) * var(--lh));
+
+  font-size: 16px;
+
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    display: grid;
+    grid-template-columns:
+      minmax(var(--gap), auto) minmax(auto, var(--xl-width))
+      minmax(var(--gap), auto);
+    grid-template-rows: var(--header-height) auto min-content;
+    grid-template-areas:
+      ". head ."
+      ". main ."
+      ". foot .";
+
+    min-height: 100vh;
+
+    color: var(--color-text);
+    font-size: var(--fs);
+    line-height: var(--lh);
+
+    :--head-foot {
+      background-color: var(--color-primary);
+      color: var(--color-text-invert);
+      outline: 100vmax solid var(--color-primary);
+      clip-path: polygon(-100vmax 0, 100vmax 0, 100vmax 100%, -100vmax 100%);
+    }
+
+    :--head-foot,
+    main {
+      padding: var(--gap);
+    }
+
+    header {
+      position: fixed;
+      inset: 0 var(--gap) auto;
+      grid-area: head;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      @media (--bp-xxl) {
+        inset: 0 calc((100vw - var(--xl-width)) / 2) auto;
+      }
+
+      .logo {
+        font-size: var(--logo-size);
+      }
+
+      .burger {
+        display: block;
+        background-color: var(--color-text-invert);
+        width: calc(var(--fs) * 1.5);
+        height: calc(var(--fs) / 4);
+        &::before,
+        &::after {
+          content: "";
+          background-color: inherit;
+          width: inherit;
+          height: inherit;
+          display: block;
+        }
+        &::before {
+          transform: translateY(calc(var(--fs) / -2));
+        }
+        &::after {
+          transform: translateY(calc(var(--fs) / 4));
+        }
+      }
+    }
+
+    main {
+      grid-area: main;
+      background-color: var(--color-secondary);
+      display: grid;
+      grid-auto-rows: min-content;
+      gap: var(--gap);
+
+      & > section {
+        :--headings {
+          font-family: sans-serif;
+        }
+      }
+    }
+
+    footer {
+      grid-area: foot;
+    }
+  }
+
+  @media (--bp-m) {
+    --gap: calc(var(--base-gap) * 2);
+    --fs: calc(var(--base-fs) * 1.2);
+    --logo-size: 2.2rem;
+  }
+
+  @media (--bp-l) {
+    --gap: calc(var(--base-gap) * 3);
+    --fs: calc(var(--base-fs) * 1.4);
+    --logo-size: 2.4rem;
+  }
+
+  @media (--bp-xl) {
+    --gap: calc(var(--base-gap) * 4);
+    --fs: calc(var(--base-fs) * 1.6);
+    --logo-size: 2.6rem;
+  }
+
+  @media (--bp-xxl) {
+    --max-width: var(--xl-width);
+    --fs: calc(var(--base-fs) * 1.8);
+    --logo-size: 2.8rem;
+  }
+
+  @media (--dark-mode) {
+    --color-text: white;
+    --color-secondary: midnightblue;
+  }
+}
