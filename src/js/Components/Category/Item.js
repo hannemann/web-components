@@ -1,4 +1,4 @@
-import { AbstractComponent } from "../Abstract.js";
+import { AbstractComponent } from "../AbstractComponent.js";
 
 class Item extends AbstractComponent {
   #_data = null;

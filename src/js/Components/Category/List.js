@@ -1,4 +1,4 @@
-import { AbstractComponent } from "../Abstract.js";
+import { AbstractComponent } from "../AbstractComponent.js";
 
 const ITEMS_COUNT = 24;
 const ITEMS_URL = "https://dummyjson.com/products";

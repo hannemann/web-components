@@ -1,4 +1,4 @@
-import { AbstractComponent } from "../../Abstract.js";
+import { AbstractComponent } from "../../AbstractComponent.js";
 
 class Hover extends AbstractComponent {
   get elements() {

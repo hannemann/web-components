@@ -1,8 +1,9 @@
-import { AbstractComponent } from "../../Abstract.js";
+//@ts-nocheck
+import { AbstractComponent } from "../../AbstractComponent.js";
 import "./Item.js";
 
 /**
- * @property {Array.<AccordionItem>} items
+ @property {HTMLSlotElement} itemSlot
  */
 class Accordion extends AbstractComponent {
   /** @inheritdoc */
@@ -49,6 +50,7 @@ class Accordion extends AbstractComponent {
    * Handle item open state change
    *
    * @param {CustomEvent} e
+   * @param {AccordionItem} e.detail
    */
   handleItemChange(e) {
     this.items.forEach((i) =>
@@ -81,8 +83,9 @@ class Accordion extends AbstractComponent {
     }, timeout);
   }
 
+  // noinspection JSUnusedGlobalSymbols
   /**
-   * Close all items
+   * Close all items, maybe used for a button to close all (multi open)
    */
   closeAll() {
     this.items.forEach((i) => (i.open = false));
@@ -90,13 +93,17 @@ class Accordion extends AbstractComponent {
 
   /**
    * obtain items
+   * @returns {AccordionItem[]}
    */
   get items() {
+    /* suppress unknown element accordion-item */
+    // noinspection JSValidateTypes
     return Array.from(this.querySelectorAll("accordion-item:not(.clone)"));
   }
 
   /**
    * Determine if accordion can open multiple tabs
+   * @returns {Boolean}
    */
   get multi() {
     return "undefined" !== typeof this.dataset.multi;
@@ -108,6 +115,7 @@ const template = /* html */ `
 :host {
     position: relative;
     display: block;
+    overflow: hidden;
 }
 </style>
 <slot></slot>
