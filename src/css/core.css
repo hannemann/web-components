@@ -2,3 +2,7 @@
 @import "./category.css";
 @import "./accordion.css";
 @import "./properties-demo.css";
+
+ismets-favourite {
+  --ismets-color: green;
+}
